@@ -1,18 +1,17 @@
-// const puppeteer = require("puppeteer");
-import chromium from 'chrome-aws-lambda';
+const express = require("express");
+const puppeteer = require("puppeteer");
+const cors = require('cors'); // Add this line
 
-module.exports = async (req, res) => {
+const app = express();
+const port = 3001;
+
+app.use(cors()); // Add this line to enable CORS for all routes
+
+app.get("/generate-keys", async (req, res) => {
   // Same Puppeteer code from the previous example
   
   (async () => {
-    const browser = await chromium.puppeteer.launch({
-      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath,
-      headless: false,
-      ignoreHTTPSErrors: true,
-    })
-    
+    const browser = await puppeteer.launch({ headless: false });
     // const browser = await puppeteer.launch(); // headless: true is the default option
     const page = await browser.newPage();
 
