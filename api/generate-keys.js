@@ -1,13 +1,6 @@
-const express = require("express");
 const puppeteer = require("puppeteer");
-const cors = require('cors'); // Add this line
 
-const app = express();
-const port = 3001;
-
-app.use(cors()); // Add this line to enable CORS for all routes
-
-app.get("/generate-keys", async (req, res) => {
+module.exports = async (req, res) => {
   // Same Puppeteer code from the previous example
   
   (async () => {
